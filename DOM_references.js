@@ -12,5 +12,4 @@ export const toFahrenheitRef = document.getElementById("to-fahrenheit");
 export const toKilometersRef = document.getElementById("to-kilometers")
 export const weatherTipsRef = document.getElementById("weather-tips");
 export const settingsRef = document.getElementById("settings");
-export const deleteAllRef = document.getElementById("delete-all");
 

@@ -86,31 +86,22 @@ export function predictions(weatherData) {
   let currentDate = currentDay.getDate();
   let dailyAverage;
   let nextDayAverage;
-  let rainVolume
-  
-
+  let {rain} = list[0];
+  rain = rain ? rain["3h"] : undefined;
 
 
   for (let i = 0; i < list.length; i++) {
     let { pop } = list[i];
     let { dt } = list[i];
-    let {rain} = list[0];
-    rainVolume = Object.values(rain);
-    
     while (new Date(dt * 1000).getDate() == currentDate) {
       hourCounter++;
       break;
     }
-
     while (pop < 0) {
       counter++;
       break;
     }
-  
   }
-
-
-console.log(rainVolume)
 
   dailyAverage = calculateAverages(list, currentDate);
   nextDayAverage = calculateAverages(list, currentDate + 1);
@@ -124,7 +115,7 @@ console.log(rainVolume)
   weatherPredictionsRef.innerHTML = carousel(
     rainPrediction(counter, hourCounter),
     tempComparison(todayTemp, tomorrowTemp), 
-    currentRain(rainVolume)
+    currentRain(rain)
   );
 
   controlCarousel();

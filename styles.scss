@@ -85,6 +85,11 @@ nav {
   &:hover {
     background-color: var(--medium-blue);
   }
+
+  &:disabled,
+  &[disabled] {
+    background-color: var(--sky-blue);
+  }
 }
 
 .main-header{
@@ -237,6 +242,13 @@ header {
   &:hover {
     background-color: var(--dark-blue);
   }
+}
+
+.weather-segments-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .add-location {

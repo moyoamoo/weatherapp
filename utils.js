@@ -68,12 +68,13 @@ export function average(max, min) {
 
 export function isDuplicateLocation(lat, lon, name) {
   let locations = getLocations();
+  if (!locations){
+    return;
+  }
   return locations.some((item) => {
     return item.lat == lat && item.lon == lon && item.name == name;
   });
 }
-
-
 
 export function toggleForecast(buttonRef, sectionRef) {
   buttonRef.addEventListener("click", () => {
@@ -83,16 +84,31 @@ export function toggleForecast(buttonRef, sectionRef) {
   });
 }
 
+let slide = 0;
 export function controlCarousel() {
   rightButtonRef = document.getElementById("right-button");
   leftButtonRef = document.getElementById("left-button");
   slidesRef = document.querySelector(".slide");
   slideContainerRef = document.getElementById("slide-container");
+
   rightButtonRef.addEventListener("click", () => {
+    if (slide === 2) {
+      slide = -1;
+    }
     slideContainerRef.scrollLeft += slidesRef.clientWidth;
+    slide++;
   });
 
   leftButtonRef.addEventListener("click", () => {
+    if (slide === 0) {
+      slide = 3;
+    }
     slideContainerRef.scrollLeft -= slidesRef.clientWidth;
+    slide--;
+  });
+
+  window.addEventListener("resize", () => {
+    slideContainerRef.scrollLeft = slidesRef.clientWidth * slide + 1;
+    console.log(slide);
   });
 }

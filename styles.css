@@ -77,6 +77,9 @@ nav li:hover {
 .delete-all:hover {
   background-color: var(--medium-blue);
 }
+.delete-all:disabled, .delete-all[disabled] {
+  background-color: var(--sky-blue);
+}
 
 .main-header {
   display: flex;
@@ -218,6 +221,13 @@ header {
 }
 .detect-location:hover {
   background-color: var(--dark-blue);
+}
+
+.weather-segments-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .add-location {

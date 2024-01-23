@@ -120,12 +120,10 @@ export function createHourHTML(
 ) {
   const dailyForecast = [];
   for (let i = 0; i < time.length; i++) {
-    //format values
     let formatHour = formatTime(new Date(time[i] * 1000));
     let formatTemp = toCelsius(hourlyMax[i]);
     let formatRainProp = Math.round(rainProbability[i] * 100);
 
-    //create HTML
     let hour = `
     <div class="hour-forecast"><img class="icon"src="https://openweathermap.org/img/wn/${
       icons[i]
@@ -168,6 +166,8 @@ export function fourDayFourcastHTML(
         `;
 }
 
+
+//switch 
 export function tempComparison(todayTemp, tomorrowTemp) {
   let tempComparisonHTML;
 
@@ -203,16 +203,14 @@ export function rainPrediction(counter, hourCounter) {
   return rainHTML;
 }
 
-export function currentRain(rain){
-  let currentRainHTML;
-  if (!rain[0]){
-    currentRainHTML = `<p>No rain currently</p>`
-  } else {
-    currentRainHTML = `<p>${rain[0]}mm of rain in the next 3 hours</p>`
-  }
-return currentRainHTML;
-}
+export function currentRain(rain) {
+  if (!rain) {
+    return `<p>No rain currently</p>`;
 
+  } else {
+    return `<p>${rain}mm of rain in the next 3 hours</p>`;
+  }
+}
 
 function getTemp(isCelsuis, temp) {
   return `${isCelsuis ? temp : Math.round((temp - 32) / 1.8)}${

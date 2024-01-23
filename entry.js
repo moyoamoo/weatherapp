@@ -11,13 +11,15 @@ import {
 } from "./DOM_references.js";
 import { getCurrentCoordinates } from "./current_location.js";
 import { showHistory } from "./local_storage.js";
-import { setupMenu} from "./menu.js";
+import { setupMenu } from "./menu.js";
 import { currentWeaterInterface, forecastInterface } from "./actions.js";
 import { predictions } from "./weather_segment.js";
 import { noLocationEntered } from "./no_location.js";
+import { getForecastURL, getUserLocationURL, getWeatherURL } from "./config.js";
 
 let temperatureRef;
 let saveLocationRef;
+let forecastData;
 let isCelsuis = true;
 let isMPH = true;
 let windRef;
@@ -27,7 +29,6 @@ let longitude;
 let latitude;
 let currentDay = new Date();
 let currentDate = currentDay.getDate();
-
 
 detectLocationRef.addEventListener("click", () => {
   getWeatherData();
@@ -44,7 +45,7 @@ export async function getInputLocation(userLocation) {
 
   try {
     const { data } = await axios.get(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${userLocation}&limit=5&appid=fbe4c2e2d244f8643bc2bac3de799ba9`
+      getUserLocationURL(userLocation)
     );
     possibleLocations = data;
     if (data.length === 0) {
@@ -84,14 +85,17 @@ export async function getWeatherData(lon, lat) {
       latitude = currentCoordinates.coords.latitude;
       longitude = currentCoordinates.coords.longitude;
     }
+    console.log(latitude, longitude)
 
     todayWeatherData = await axios.get(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=fbe4c2e2d244f8643bc2bac3de799ba9`
+      getWeatherURL( latitude, longitude)
     );
     currentWeaterInterface(todayWeatherData, isCelsuis, isMPH);
+    console.log(todayWeatherData)
     settingsRef.style.display = "flex";
   } catch (error) {
     currentWeatherRef.innerHTML = `<p>Current Weather Data unavailable</p>`;
+    console.log(error);
   }
 }
 
@@ -105,14 +109,12 @@ export async function getForecastData(lon, lat) {
       longitude = currentCoordinates.coords.longitude;
     }
 
-    const forecastData = await axios.get(
-      `https://api.openweathermap.org/data/2.5/forecast/?lat=${latitude}&lon=${longitude}&appid=fbe4c2e2d244f8643bc2bac3de799ba9`
-    );
+    const forecastData = await axios.get(getForecastURL(latitude, longitude));
 
     forecastInterface(forecastData, currentDate, isCelsuis);
     predictions(forecastData);
   } catch (error) {
-    console.log(error)
+    console.log(error);
     fourDayForecastRef.innerHTML = `<div class="main-weather">Forecast not available</div>`;
   }
 }
@@ -133,6 +135,8 @@ function changeTemperature() {
   toFahrenheitRef.addEventListener("click", () => {
     isCelsuis = !isCelsuis;
     currentWeaterInterface(todayWeatherData, isCelsuis, isMPH);
+    forecastInterface(forecastData, currentDate, isCelsuis);
+
     !isCelsuis
       ? (toFahrenheitRef.innerText = `Celsuis`)
       : (toFahrenheitRef.innerText = `Fahrenheit`);

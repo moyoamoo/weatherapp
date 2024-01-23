@@ -137,22 +137,10 @@ export function forecastInterface(weatherData, currentDate, isCelsuis) {
     toggleForecast(forecastButtonRefs[i], forecastSectionRefs[i]);
   }
 
-  changeTemperature(isCelsuis, weatherData, currentDate)
   
 
 }
 
-function changeTemperature(isCelsuis, weatherData, currentDate) {
-  temperatureRef = document.getElementsByClassName("temp");
-  toFahrenheitRef.addEventListener("click", () => {
-    isCelsuis = !isCelsuis;
-      forecastInterface(weatherData, currentDate, isCelsuis)
-    if (!isCelsuis) {
-      toFahrenheitRef.innerText = `Celsuis`;
-    } else {
-      toFahrenheitRef.innerText = `Farenheit`;
-    }
-  });
-}
+
 
 

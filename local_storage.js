@@ -1,6 +1,6 @@
-import { getWeatherData, getForecastData} from "./entry.js";
-import { deleteAllRef } from "./DOM_references.js";
-import { isLocations } from "./menu.js";
+import { getWeatherData, getForecastData } from "./entry.js";
+// import { isLocations } from "./menu.js";
+// import { deleteAllRef } from "./DOM_references.js";
 
 let locations;
 
@@ -21,9 +21,19 @@ export function saveLocation(lon, lat, name) {
 }
 
 export function removeLocation(index) {
+  //if sends nothing, it remo
+  if (index === undefined){
+    localStorage.removeItem("locations");
+    return;
+  }
+ 
   const locations = getLocations();
   locations.splice(index, 1);
-  localStorage.setItem(`locations`, JSON.stringify(locations));
+  if (locations.length === 0) {
+    localStorage.removeItem("locations");
+  } else {
+    localStorage.setItem(`locations`, JSON.stringify(locations));
+  }
 }
 
 export function getLocations() {
@@ -32,19 +42,36 @@ export function getLocations() {
 
 export function showHistory() {
   locations = getLocations();
+  const menuListRef = document.getElementById("menu-list");
+
   if (!locations) {
+    menuListRef.innerHTML = "";
     return;
   }
+
   const html = locations.map((item, index) => {
     return `<li id="${item.lon},${item.lat}">${item.name} <button class="delete" id="${index}"><i class="fa-solid fa-trash"></i></button></li>`;
   });
 
-  const menuListRef = document.getElementById("menu-list");
   menuListRef.innerHTML = `${html.join("")}`;
   menuListRef.addEventListener("click", (e) => {
     const [lat, lon] = e.target.id.split(",");
     getWeatherData(lat, lon);
     getForecastData(lat, lon);
+  });
+
+  menuListRef.insertAdjacentHTML(
+    "beforeend",
+    `<button class="delete-all" id="delete-all">
+  Delete All Locations
+</button>`
+  );
+
+  const deleteAllRef = document.getElementById("delete-all");
+  deleteAllRef.addEventListener("click", () => {
+    locations = getLocations();
+    removeLocation();
+    showHistory();
   });
 
   const deleteButtonRef = document.querySelectorAll(".delete");
@@ -54,14 +81,6 @@ export function showHistory() {
       showHistory();
     });
   });
-  isLocations();
+
+  // isLocations();
 }
-
-deleteAllRef.addEventListener("click", () => {
-  locations = getLocations();
-  locations.forEach(removeLocation);
-  showHistory();
- 
-});
-
-
