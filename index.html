@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./favicon/favicon-16x16.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="manifest" href="./favicon/site.webmanifest" />
+    <link rel="stylesheet" href="generics.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/6bd2a3b250.js"
+      crossorigin="anonymous"
+    ></script>
+    <script type="module" src="entry.js"></script>
+
+    <title>Weather</title>
+  </head>
+  <body>
+    <header>
+      <div class="heading">
+       
+        <button id="hamburger" class="hamburger">
+          <div class="ham-line-1" id="line-1"></div>
+          <div class="ham-line-2" id="line-2"></div>
+          <div class="ham-line-3" id="line-3"></div>
+        </button>
+        <a href="./index.html">
+          <h1>Weather Forecast</h1>
+        </a>
+        <img
+          src="./Images/weather_icon.png"
+          alt="cloud with sun illustration"
+        />
+       
+       
+      </div>
+      <nav id="navigation">
+        <div class="menu">
+          <h2 class="menu-title">Saved Locations</h2>
+          <ul id="menu-list"></ul>
+          <button class="delete-all" id="delete-all">
+            Delete All Locations
+          </button>
+        </div>
+      </nav>
+      <div class="header-main">
+        <button id="detect-location" class="detect-location">
+          Use Current Location <i class="fa-solid fa-location-crosshairs"></i>
+        </button>
+        <div class="location-search-container">
+          <div class="search-bar">
+            <input
+              type="text"
+              id="search-location"
+              placeholder="Search Location"
+              class="search-location"
+            />
+            <button id="search-location-btn" class="search-location-btn">
+              Search
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+          <select
+            name="possible-location"
+            id="possible-locations"
+            class="possible-locations"
+          ></select>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="weather-container">
+        <div id="current-weather" class="main-weather">
+          <h2>Find weather for your location</h2>
+        </div>
+
+        <div id="four-day-forecast" class="four-day-forecast"></div>
+        <div class="weather-segments-container">
+          <div id="predictions" class="carousel-container"></div>
+
+          <div id="weather-tips" class="weather-tips"></div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div id="settings" class="settings">
+        <div class="setting-container">
+          <h4>Temperature</h4>
+          <button id="to-fahrenheit">Fahrenheit</button>
+        </div>
+        <div class="setting-container">
+          <h4>Wind Speed</h4>
+          <button id="to-kilometers">Kilometers per Hour</button>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
