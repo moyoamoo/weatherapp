@@ -5,7 +5,7 @@ import {
   average,
   controlCarousel,
 } from "./utils.js ";
-import { rainPrediction, tempComparison, carousel } from "./html.js";
+import { rainPrediction, tempComparison, carousel, currentRain} from "./html.js";
 
 export function tip(weatherTip) {
   return weatherTipsRef.insertAdjacentHTML(
@@ -86,12 +86,16 @@ export function predictions(weatherData) {
   let currentDate = currentDay.getDate();
   let dailyAverage;
   let nextDayAverage;
+  let rainVolume
+  
 
-  console.log(list)
+
 
   for (let i = 0; i < list.length; i++) {
     let { pop } = list[i];
     let { dt } = list[i];
+    let {rain} = list[0];
+    rainVolume = Object.values(rain);
     
     while (new Date(dt * 1000).getDate() == currentDate) {
       hourCounter++;
@@ -105,8 +109,8 @@ export function predictions(weatherData) {
   
   }
 
-  console.log(hourCounter)
-  console.log(counter)
+
+console.log(rainVolume)
 
   dailyAverage = calculateAverages(list, currentDate);
   nextDayAverage = calculateAverages(list, currentDate + 1);
@@ -119,7 +123,8 @@ export function predictions(weatherData) {
 
   weatherPredictionsRef.innerHTML = carousel(
     rainPrediction(counter, hourCounter),
-    tempComparison(todayTemp, tomorrowTemp)
+    tempComparison(todayTemp, tomorrowTemp), 
+    currentRain(rainVolume)
   );
 
   controlCarousel();

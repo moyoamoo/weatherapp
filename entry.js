@@ -118,6 +118,7 @@ export async function getForecastData(lon, lat) {
     forecastInterface(forecastData, currentDate, isCelsuis);
     predictions(forecastData);
   } catch (error) {
+    console.log(error)
     fourDayForecastRef.innerHTML = `<div class="main-weather">Forecast not available</div>`;
   }
 }

@@ -72,7 +72,7 @@ export const getCurrentWeatherInterface = (
         </div>`;
 };
 
-export function carousel(rainHTML, tempComparisonHTML) {
+export function carousel(rainHTML, tempComparisonHTML, currentRainHTML) {
   return `
   
   <div class="slide-container" id="slide-container">
@@ -90,6 +90,14 @@ export function carousel(rainHTML, tempComparisonHTML) {
 <div class="overlay">
 <h2>Tomorrow's Weather</h2>
 <p>${tempComparisonHTML}</p>
+</div>
+</div>
+
+<div class="slide">
+<img src="./images/rainprop.jpg"/>
+<div class="overlay">
+<h2>Current Rain</h2>
+<p>${currentRainHTML}</p>
 </div>
 </div>
 
@@ -194,6 +202,17 @@ export function rainPrediction(counter, hourCounter) {
   }
   return rainHTML;
 }
+
+export function currentRain(rain){
+  let currentRainHTML;
+  if (!rain[0]){
+    currentRainHTML = `<p>No rain currently</p>`
+  } else {
+    currentRainHTML = `<p>${rain[0]}mm of rain in the next 3 hours</p>`
+  }
+return currentRainHTML;
+}
+
 
 function getTemp(isCelsuis, temp) {
   return `${isCelsuis ? temp : Math.round((temp - 32) / 1.8)}${

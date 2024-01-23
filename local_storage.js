@@ -2,7 +2,6 @@ import { getWeatherData, getForecastData } from "./entry.js";
 
 let locations;
 
-//sav location to local storage
 export function saveLocation(lon, lat, name) {
   const locations = JSON.parse(localStorage.getItem("locations"));
   if (locations) {
@@ -19,19 +18,16 @@ export function saveLocation(lon, lat, name) {
   }
 }
 
-//remove function from local storage
 export function removeLocation(index) {
   const locations = getLocations();
   locations.splice(index, 1);
   localStorage.setItem(`locations`, JSON.stringify(locations));
 }
 
-//get loocation local storage
 export function getLocations() {
   return JSON.parse(localStorage.getItem("locations"));
 }
 
-//show locations saved in local storage in menu
 export function showHistory() {
   locations = getLocations();
   if (!locations) {
@@ -48,8 +44,7 @@ export function showHistory() {
     getWeatherData(lat, lon);
     getForecastData(lat, lon);
   });
-
-  //delete from menu location from local storage
+  
   const deleteButtonRef = document.querySelectorAll(".delete");
   Array.from(deleteButtonRef).forEach((item) => {
     item.addEventListener("click", (e) => {
