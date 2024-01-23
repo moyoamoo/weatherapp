@@ -11,11 +11,10 @@ import {
 } from "./DOM_references.js";
 import { getCurrentCoordinates } from "./current_location.js";
 import { showHistory } from "./local_storage.js";
-import { setupMenu } from "./menu.js";
+import { setupMenu} from "./menu.js";
 import { currentWeaterInterface, forecastInterface } from "./actions.js";
 import { predictions } from "./weather_segment.js";
 import { noLocationEntered } from "./no_location.js";
-import { createHourHTML } from "./html.js";
 
 let temperatureRef;
 let saveLocationRef;
@@ -29,22 +28,17 @@ let latitude;
 let currentDay = new Date();
 let currentDate = currentDay.getDate();
 
-//desktop mode
-//style menu
 
-//display weather data when button is clicked
 detectLocationRef.addEventListener("click", () => {
   getWeatherData();
   getForecastData();
 });
 
-// get value user enters - send to find co-ordinates
 searchLocationBtnRef.addEventListener("click", () => {
   let userLocation = searchLocationRef.value;
   getInputLocation(userLocation);
 });
 
-//get users coordinates
 export async function getInputLocation(userLocation) {
   possibleLocationsRef.innerHTML = "";
 

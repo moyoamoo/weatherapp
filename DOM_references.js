@@ -10,5 +10,7 @@ export const navigationRef = document.getElementById("navigation");
 export const menuListRef = document.getElementById("menu-list");
 export const toFahrenheitRef = document.getElementById("to-fahrenheit");
 export const toKilometersRef = document.getElementById("to-kilometers")
-export const  weatherTipsRef = document.getElementById("weather-tips");
-export const settingsRef = document.getElementById("settings")
+export const weatherTipsRef = document.getElementById("weather-tips");
+export const settingsRef = document.getElementById("settings");
+export const deleteAllRef = document.getElementById("delete-all");
+

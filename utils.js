@@ -58,7 +58,7 @@ export function threeHourlyFourcast(date, list) {
       icons.push(icon);
     }
   }
-  return {time, hourlyMax, rainProbability, icons};
+  return { time, hourlyMax, rainProbability, icons };
 }
 
 export function average(max, min) {
@@ -66,16 +66,16 @@ export function average(max, min) {
   return average;
 }
 
-export function isDuplicateLocation(lat, lon, name){
-let locations = getLocations();
-return locations.some((item) => {
-  return item.lat == lat && item.lon == lon && item.name == name;
-});
+export function isDuplicateLocation(lat, lon, name) {
+  let locations = getLocations();
+  return locations.some((item) => {
+    return item.lat == lat && item.lon == lon && item.name == name;
+  });
 }
 
 
-export function toggleForecast(buttonRef, sectionRef){
 
+export function toggleForecast(buttonRef, sectionRef) {
   buttonRef.addEventListener("click", () => {
     sectionRef.style.display === "flex"
       ? (sectionRef.style.display = "none")

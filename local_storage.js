@@ -1,4 +1,6 @@
-import { getWeatherData, getForecastData } from "./entry.js";
+import { getWeatherData, getForecastData} from "./entry.js";
+import { deleteAllRef } from "./DOM_references.js";
+import { isLocations } from "./menu.js";
 
 let locations;
 
@@ -44,7 +46,7 @@ export function showHistory() {
     getWeatherData(lat, lon);
     getForecastData(lat, lon);
   });
-  
+
   const deleteButtonRef = document.querySelectorAll(".delete");
   Array.from(deleteButtonRef).forEach((item) => {
     item.addEventListener("click", (e) => {
@@ -52,11 +54,14 @@ export function showHistory() {
       showHistory();
     });
   });
+  isLocations();
 }
 
-const deleteAllRef = document.getElementById("delete-all");
 deleteAllRef.addEventListener("click", () => {
   locations = getLocations();
   locations.forEach(removeLocation);
   showHistory();
+ 
 });
+
+
