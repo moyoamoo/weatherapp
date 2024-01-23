@@ -66,7 +66,6 @@ export function average(max, min) {
   return average;
 }
 
-slack
 export function isDuplicateLocation(lat, lon, name){
 let locations = getLocations();
 return locations.some((item) => {

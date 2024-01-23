@@ -87,22 +87,26 @@ export function predictions(weatherData) {
   let dailyAverage;
   let nextDayAverage;
 
+  console.log(list)
+
   for (let i = 0; i < list.length; i++) {
     let { pop } = list[i];
-    while (pop != 0) {
-      counter++;
-      break;
-    }
-  }
-
-
-  for (let i = 0; i < list.length; i++) {
     let { dt } = list[i];
+    
     while (new Date(dt * 1000).getDate() == currentDate) {
       hourCounter++;
       break;
     }
+
+    while (pop < 0) {
+      counter++;
+      break;
+    }
+  
   }
+
+  console.log(hourCounter)
+  console.log(counter)
 
   dailyAverage = calculateAverages(list, currentDate);
   nextDayAverage = calculateAverages(list, currentDate + 1);

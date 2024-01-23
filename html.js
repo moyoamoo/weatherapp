@@ -1,6 +1,5 @@
 import { formatTime, toCelsius, selectRainImage } from "./utils.js";
 
-//create current weather HTML
 export const getCurrentWeatherInterface = (
   name,
   timeCalcuated,
@@ -20,10 +19,6 @@ export const getCurrentWeatherInterface = (
   isMPH
 ) => {
   return `
-  
-
-      
-       
     <div class="current-weather-container">
     <div  class="weather-description ">
     <div class="current-weather-heading">
@@ -41,9 +36,6 @@ export const getCurrentWeatherInterface = (
             <p class="temperature temp">${getTemp(isCelsuis, realFeal)}</p>
         </div>
         
-    
-
-    
         <div class="inner-weather-container">
             <p class="caption"> Weather Today: ${description}</p>
             <img src="https://openweathermap.org/img/wn/${icon}@2x.png">
@@ -51,7 +43,6 @@ export const getCurrentWeatherInterface = (
           </div>
     </div>
   
-        
         <div class="weather-container">
           <div class="weather-unit"><i class="fa-solid fa-temperature-three-quarters"></i> <span>High/Low</span>
            <p><span class="temp">${getTemp(
@@ -81,10 +72,8 @@ export const getCurrentWeatherInterface = (
         </div>`;
 };
 
-//create carousel HTML
 export function carousel(rainHTML, tempComparisonHTML) {
   return `
-  
   
   <div class="slide-container" id="slide-container">
 
@@ -114,9 +103,6 @@ export function carousel(rainHTML, tempComparisonHTML) {
 `;
 }
 
-//toggle between f and c
-
-// create hourly forecast HTML
 export function createHourHTML(
   time,
   icons,
@@ -143,13 +129,11 @@ export function createHourHTML(
       formatRainProp
     )}.png"/></div>`;
     dailyForecast.push(hour);
-  
   }
 
   return dailyForecast;
 }
 
-//create forecast button
 export function fourDayFourcastHTML(
   formatDay,
   formatDate,
@@ -180,11 +164,11 @@ export function tempComparison(todayTemp, tomorrowTemp) {
   let tempComparisonHTML;
 
   if (todayTemp == tomorrowTemp) {
-    tempComparisonHTML = `<p>Today's temperature is same as tomorrow's</p>`;
+    tempComparisonHTML = `<p>Today's average temperature is same as tomorrow's</p>`;
   } else if (tomorrowTemp > todayTemp) {
-    tempComparisonHTML = `<p>Tomorrow will be warmer than today</p>`;
+    tempComparisonHTML = `<p>Tomorrow's average temperature will be warmer than today</p>`;
   } else {
-    tempComparisonHTML = `<p>Tomorrrow will be colder than today</p>`;
+    tempComparisonHTML = `<p>Tomorrrow's average temperature will be colder than today</p>`;
   }
 
   return tempComparisonHTML;
@@ -197,16 +181,16 @@ export function rainPrediction(counter, hourCounter) {
   let rainHTML;
   if (counter === 1) {
     rainHTML = `<p>It will rain in the next 3 hours</p>`;
-  } else if (counter === 40) {
+  } else if (counter === 39) {
     rainHTML = `<p>No rain predicted in the next 4 days</p>`;
-  } else if (counter === hourCounter) {
-    rainHTML = `<p>Next chance of rain in ${Math.round(
-      counter * 3
-    )} hours </p>`;
-  } else if (counter > 0) {
+  } else if (counter < 1 && counter >= hourCounter) {
     rainHTML = `<p>Next chance of rain in ${Math.round(
       ((counter - hourCounter) * 3) / 24
     )} days</p>`;
+  } else if (counter < 1) {
+    rainHTML = `<p>Next chance of rain in ${Math.round(
+      hourCounter * 3
+    )} hours </p>`;
   }
   return rainHTML;
 }
