@@ -1,7 +1,4 @@
 import { getWeatherData, getForecastData } from "./entry.js";
-// import { isLocations } from "./menu.js";
-// import { deleteAllRef } from "./DOM_references.js";
-
 let locations;
 
 export function saveLocation(lon, lat, name) {
@@ -21,7 +18,6 @@ export function saveLocation(lon, lat, name) {
 }
 
 export function removeLocation(index) {
-  //if sends nothing, it remo
   if (index === undefined){
     localStorage.removeItem("locations");
     return;
@@ -82,5 +78,4 @@ export function showHistory() {
     });
   });
 
-  // isLocations();
 }

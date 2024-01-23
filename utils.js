@@ -109,6 +109,6 @@ export function controlCarousel() {
 
   window.addEventListener("resize", () => {
     slideContainerRef.scrollLeft = slidesRef.clientWidth * slide + 1;
-    console.log(slide);
+
   });
 }

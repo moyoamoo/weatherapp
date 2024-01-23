@@ -21,7 +21,6 @@ let forecastSectionRefs;
 let temperatureRef;
 
 export function currentWeaterInterface(weatherData, isCelsuis, isMPH) {
-  //Get data from API
   const { name } = weatherData.data;
   const { temp, temp_max, temp_min, pressure, humidity, feels_like } =
     weatherData.data.main;
@@ -75,29 +74,24 @@ export function currentWeaterInterface(weatherData, isCelsuis, isMPH) {
 }
 
 export function forecastInterface(weatherData, currentDate, isCelsuis) {
-  
   const {list} = weatherData.data;
-  
   fourDayForecastRef.innerHTML = "";
-
   let counter = 0;
 
   for (let i = 0; i < list.length; i++) {
     if (i % 8 == 0 && i != 0) {
+      let { icon } = list[i].weather[0];
       counter++;
       let { time, hourlyMax, rainProbability, icons } = threeHourlyFourcast(
         currentDate + counter,
         list
       );
-
       const averages = calculateAverages(
         list,
         new Date(list[i].dt * 1000).getDate()
       );
-      let { icon } = list[i].weather[0];
       let { minTemp, maxTemp } = averages;
 
-      //format values
       let minimumTemp = toCelsius(minTemp);
       let maximumTemp = toCelsius(maxTemp);
       let formatDay = dayNames[new Date(list[i].dt * 1000).getDay()];
@@ -131,16 +125,13 @@ export function forecastInterface(weatherData, currentDate, isCelsuis) {
   }
   forecastButtonRefs = document.getElementsByClassName("forecast-button");
   forecastSectionRefs = document.getElementsByClassName("forecast-body");
-  
-  
   for (let i = 0; i < forecastButtonRefs.length; i++) {
     toggleForecast(forecastButtonRefs[i], forecastSectionRefs[i]);
   }
+  
 
   
 
 }
-
-
 
 

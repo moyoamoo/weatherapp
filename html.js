@@ -78,7 +78,7 @@ export function carousel(rainHTML, tempComparisonHTML, currentRainHTML) {
   <div class="slide-container" id="slide-container">
 
 <div class="slide">
-  <img src="./images/rain.jpg"/>
+  <img src="./images/rain.png"/>
   <div class="overlay">
   <h2>Rain Prediction</h2>
   <p>${rainHTML}</p>
@@ -86,7 +86,7 @@ export function carousel(rainHTML, tempComparisonHTML, currentRainHTML) {
 </div>
 
 <div class="slide">
-<img src="./images/sky.jpg"/>
+<img src="./images/sky.png"/>
 <div class="overlay">
 <h2>Tomorrow's Weather</h2>
 <p>${tempComparisonHTML}</p>
@@ -94,7 +94,7 @@ export function carousel(rainHTML, tempComparisonHTML, currentRainHTML) {
 </div>
 
 <div class="slide">
-<img src="./images/rainprop.jpg"/>
+<img src="./images/rainprop.png"/>
 <div class="overlay">
 <h2>Current Rain</h2>
 <p>${currentRainHTML}</p>
@@ -166,47 +166,47 @@ export function fourDayFourcastHTML(
         `;
 }
 
-
-//switch 
+//switch
 export function tempComparison(todayTemp, tomorrowTemp) {
-  let tempComparisonHTML;
-
   if (todayTemp == tomorrowTemp) {
-    tempComparisonHTML = `<p>Today's average temperature is same as tomorrow's</p>`;
+    return `<p>Today's average temperature is same as tomorrow's</p>`;
   } else if (tomorrowTemp > todayTemp) {
-    tempComparisonHTML = `<p>Tomorrow's average temperature will be warmer than today</p>`;
+    return `<p>Tomorrow's average temperature will be warmer than today</p>`;
   } else {
-    tempComparisonHTML = `<p>Tomorrrow's average temperature will be colder than today</p>`;
+    return `<p>Tomorrrow's average temperature will be colder than today</p>`;
   }
-
-  return tempComparisonHTML;
 }
 
 export function rainPrediction(counter, hourCounter) {
   counter++;
   hourCounter++;
-
   let rainHTML;
-  if (counter === 1) {
-    rainHTML = `<p>It will rain in the next 3 hours</p>`;
-  } else if (counter === 39) {
-    rainHTML = `<p>No rain predicted in the next 4 days</p>`;
-  } else if (counter < 1 && counter >= hourCounter) {
-    rainHTML = `<p>Next chance of rain in ${Math.round(
-      ((counter - hourCounter) * 3) / 24
-    )} days</p>`;
-  } else if (counter < 1) {
-    rainHTML = `<p>Next chance of rain in ${Math.round(
-      hourCounter * 3
-    )} hours </p>`;
+
+  switch (true) {
+    case counter === 1:
+      rainHTML = `<p>It will rain in the next 3 hours</p>`;
+      break;
+    case counter === 39:
+      rainHTML = `<p>No rain predicted in the next 4 days</p>`;
+      break;
+    case counter < 1 && counter >= hourCounter:
+      rainHTML = `<p>Next chance of rain in ${Math.round(
+        ((counter - hourCounter) * 3) / 24
+      )} days</p>`;
+      break;
+    default:
+      rainHTML = `<p>Next chance of rain in ${Math.round(
+        hourCounter * 3
+      )} hours </p>`;
+      break;
   }
+
   return rainHTML;
 }
 
 export function currentRain(rain) {
   if (!rain) {
     return `<p>No rain currently</p>`;
-
   } else {
     return `<p>${rain}mm of rain in the next 3 hours</p>`;
   }

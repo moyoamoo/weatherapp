@@ -20,8 +20,6 @@ export function weatherTips(visibility, speed, humidity, temp, all) {
   let cloudy = all;
 
   weatherTipsRef.innerHTML = "";
-
-  //format values
   let visibilityKM = visibility / 1000;
   let speedMPH = Math.round(speed * 2.23694);
   let humidityPercentage = Math.round(humidity * 100);
@@ -88,6 +86,7 @@ export function predictions(weatherData) {
   let nextDayAverage;
   let {rain} = list[0];
   rain = rain ? rain["3h"] : undefined;
+
 
 
   for (let i = 0; i < list.length; i++) {

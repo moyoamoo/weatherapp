@@ -85,17 +85,17 @@ export async function getWeatherData(lon, lat) {
       latitude = currentCoordinates.coords.latitude;
       longitude = currentCoordinates.coords.longitude;
     }
-    console.log(latitude, longitude)
+
 
     todayWeatherData = await axios.get(
       getWeatherURL( latitude, longitude)
     );
     currentWeaterInterface(todayWeatherData, isCelsuis, isMPH);
-    console.log(todayWeatherData)
+   
     settingsRef.style.display = "flex";
   } catch (error) {
     currentWeatherRef.innerHTML = `<p>Current Weather Data unavailable</p>`;
-    console.log(error);
+   
   }
 }
 
@@ -109,17 +109,34 @@ export async function getForecastData(lon, lat) {
       longitude = currentCoordinates.coords.longitude;
     }
 
-    const forecastData = await axios.get(getForecastURL(latitude, longitude));
+    forecastData = await axios.get(getForecastURL(latitude, longitude));
 
     forecastInterface(forecastData, currentDate, isCelsuis);
     predictions(forecastData);
   } catch (error) {
-    console.log(error);
+  
     fourDayForecastRef.innerHTML = `<div class="main-weather">Forecast not available</div>`;
   }
+
 }
 
-function changeWindSpeed() {
+
+
+
+
+function changeUnit(){
+  windRef = document.getElementsByClassName("wind");
+  temperatureRef = document.getElementsByClassName("temp");
+  toFahrenheitRef.addEventListener("click", () => {
+    isCelsuis = !isCelsuis;
+    forecastInterface(forecastData, currentDate, isCelsuis);
+    currentWeaterInterface(todayWeatherData, isCelsuis, isMPH);
+    !isCelsuis
+      ? (toFahrenheitRef.innerText = `Celsuis`)
+      : (toFahrenheitRef.innerText = `Fahrenheit`);
+  });
+
+
   windRef = document.getElementsByClassName("wind");
   toKilometersRef.addEventListener("click", () => {
     isMPH = !isMPH;
@@ -130,20 +147,6 @@ function changeWindSpeed() {
   });
 }
 
-function changeTemperature() {
-  temperatureRef = document.getElementsByClassName("temp");
-  toFahrenheitRef.addEventListener("click", () => {
-    isCelsuis = !isCelsuis;
-    currentWeaterInterface(todayWeatherData, isCelsuis, isMPH);
-    forecastInterface(forecastData, currentDate, isCelsuis);
-
-    !isCelsuis
-      ? (toFahrenheitRef.innerText = `Celsuis`)
-      : (toFahrenheitRef.innerText = `Fahrenheit`);
-  });
-}
-
 showHistory();
-changeTemperature();
-changeWindSpeed();
+changeUnit();
 setupMenu();
