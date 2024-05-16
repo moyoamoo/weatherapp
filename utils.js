@@ -29,21 +29,21 @@ export function selectRainImage(value) {
 }
 
 
-export function calculateAverages(data, day) {
-  let maxTemp = 0;
-  let minTemp = 999;
-  for (let i = 0; i < data.length; i++) {
-    if (new Date(data[i].dt * 1000).getDate() === day) {
-      if (data[i].main.temp_max > maxTemp) {
-        maxTemp = data[i].main.temp_max;
-      }
-      if (data[i].main.temp_min < minTemp) {
-        minTemp = data[i].main.temp_min;
-      }
-    }
-  }
-  return { maxTemp, minTemp };
-}
+// export function calculateAverages(data, day) {
+//   let maxTemp = 0;
+//   let minTemp = 999;
+//   for (let i = 0; i < data.length; i++) {
+//     if (new Date(data[i].dt * 1000).getDate() === day) {
+//       if (data[i].main.temp_max > maxTemp) {
+//         maxTemp = data[i].main.temp_max;
+//       }
+//       if (data[i].main.temp_min < minTemp) {
+//         minTemp = data[i].main.temp_min;
+//       }
+//     }
+//   }
+//   return { maxTemp, minTemp };
+// }
 
 export function threeHourlyFourcast(date, list) {
   let time = [];

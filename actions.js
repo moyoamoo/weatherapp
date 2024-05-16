@@ -1,13 +1,19 @@
-import { currentWeatherRef, fourDayForecastRef, toFahrenheitRef} from "./DOM_references.js";
+import {
+  currentWeatherRef,
+  fourDayForecastRef,
+  toFahrenheitRef,
+} from "./DOM_references.js";
 import { saveLocation, showHistory } from "./local_storage.js";
 import {
   toCelsius,
   isDuplicateLocation,
-  calculateAverages,
+  // calculateAverages,
   threeHourlyFourcast,
   toggleForecast,
+  createDate,
 } from "./utils.js";
 import { weatherTips } from "./weather_segment.js";
+import { calculateAverages } from "./calculateAverages.js";
 import {
   createHourHTML,
   fourDayFourcastHTML,
@@ -43,7 +49,7 @@ export function currentWeaterInterface(weatherData, isCelsuis, isMPH) {
   //Format Data
   const sunriseUnix = new Date(sunrise * 1000);
   const sunsetUnix = new Date(sunset * 1000);
-  const timeCalcuated = new Date(dt * 1000);
+  const timeCalcuated = createDate(dt);
 
   currentWeatherRef.style.background = "none";
 
@@ -62,7 +68,7 @@ export function currentWeaterInterface(weatherData, isCelsuis, isMPH) {
     sunriseUnix,
     sunsetUnix,
     isDuplicateLocation(lat, lon, name),
-    isCelsuis, 
+    isCelsuis,
     isMPH
   );
 
@@ -74,7 +80,7 @@ export function currentWeaterInterface(weatherData, isCelsuis, isMPH) {
 }
 
 export function forecastInterface(weatherData, currentDate, isCelsuis) {
-  const {list} = weatherData.data;
+  const { list } = weatherData.data;
   fourDayForecastRef.innerHTML = "";
   let counter = 0;
 
@@ -128,10 +134,4 @@ export function forecastInterface(weatherData, currentDate, isCelsuis) {
   for (let i = 0; i < forecastButtonRefs.length; i++) {
     toggleForecast(forecastButtonRefs[i], forecastSectionRefs[i]);
   }
-  
-
-  
-
 }
-
-

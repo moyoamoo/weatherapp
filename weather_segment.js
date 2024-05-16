@@ -1,11 +1,12 @@
 import { weatherPredictionsRef, weatherTipsRef } from "./DOM_references.js";
+import { toCelsius, average, controlCarousel } from "./utils.js ";
 import {
-  toCelsius,
-  calculateAverages,
-  average,
-  controlCarousel,
-} from "./utils.js ";
-import { rainPrediction, tempComparison, carousel, currentRain} from "./html.js";
+  rainPrediction,
+  tempComparison,
+  carousel,
+  currentRain,
+} from "./html.js";
+import { calculateAverages } from "./calculateAverages.js";
 
 export function tip(weatherTip) {
   return weatherTipsRef.insertAdjacentHTML(
@@ -84,10 +85,8 @@ export function predictions(weatherData) {
   let currentDate = currentDay.getDate();
   let dailyAverage;
   let nextDayAverage;
-  let {rain} = list[0];
+  let { rain } = list[0];
   rain = rain ? rain["3h"] : undefined;
-
-
 
   for (let i = 0; i < list.length; i++) {
     let { pop } = list[i];
@@ -113,7 +112,7 @@ export function predictions(weatherData) {
 
   weatherPredictionsRef.innerHTML = carousel(
     rainPrediction(counter, hourCounter),
-    tempComparison(todayTemp, tomorrowTemp), 
+    tempComparison(todayTemp, tomorrowTemp),
     currentRain(rain)
   );
 
