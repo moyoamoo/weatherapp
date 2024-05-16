@@ -14,7 +14,6 @@ import { showHistory } from "./local_storage.js";
 import { setupMenu } from "./menu.js";
 import { currentWeaterInterface, forecastInterface } from "./actions.js";
 import { predictions } from "./weather_segment.js";
-import { noLocationEntered } from "./no_location.js";
 import { getForecastURL, getUserLocationURL, getWeatherURL } from "./config.js";
 
 let temperatureRef;
@@ -30,7 +29,6 @@ let latitude;
 export let currentDay = new Date();
 export let currentDate = currentDay.getDate();
 
-
 detectLocationRef.addEventListener("click", () => {
   getWeatherData();
   getForecastData();
@@ -41,33 +39,38 @@ searchLocationBtnRef.addEventListener("click", () => {
   getInputLocation(userLocation);
 });
 
-export async function getInputLocation(userLocation) {
+export const getInputLocation = async (userLocation) => {
   possibleLocationsRef.innerHTML = "";
 
   try {
-    const { data } = await axios.get(
-      getUserLocationURL(userLocation)
-    );
+    const { data } = await axios.get(getUserLocationURL(userLocation));
     possibleLocations = data;
     if (data.length === 0) {
-      noLocationEntered();
       possibleLocationsRef.style.display = "none";
     }
     possibleLocationsRef.style.display = "block";
-    for (let i = 0; i < data.length; i++) {
+
+    let counter = 0;
+    data.forEach((location) => {
       possibleLocationsRef.insertAdjacentHTML(
         "beforeend",
-        `<option value="${i}"><p>${data[i].name}, ${data[i].state}, ${data[i].country}</p></option>`
+        `<option value="${counter++}"><p>${location.name}, ${location.state}, ${
+          location.country
+        }</p></option>`
       );
-    }
-  } catch (error) {}
+    });
+  } catch (error) {
+    currentWeatherRef.innerHTML = `
+    <h2>No Locations Available<h2>
+  `;
+  }
 
   if ((possibleLocationsRef.value = "")) {
     currentWeatherRef.innerHTML = `
   <h2>Select a location<h2>
 `;
   }
-}
+};
 
 possibleLocationsRef.addEventListener("change", (e) => {
   const { lon, lat } = possibleLocations[Number(e.target.value)];
@@ -75,7 +78,7 @@ possibleLocationsRef.addEventListener("change", (e) => {
   possibleLocationsRef.style.display = "none";
 });
 
-export async function getWeatherData(lon, lat) {
+export const getWeatherData = async (lon, lat) => {
   try {
     currentWeatherRef.innerHTML = `  <p>Getting Weather Data</p>
     <span class="loader"></span>`;
@@ -87,20 +90,16 @@ export async function getWeatherData(lon, lat) {
       longitude = currentCoordinates.coords.longitude;
     }
 
-
-    todayWeatherData = await axios.get(
-      getWeatherURL( latitude, longitude)
-    );
+    todayWeatherData = await axios.get(getWeatherURL(latitude, longitude));
     currentWeaterInterface(todayWeatherData, isCelsuis, isMPH);
-   
+
     settingsRef.style.display = "flex";
   } catch (error) {
     currentWeatherRef.innerHTML = `<p>Current Weather Data unavailable</p>`;
-   
   }
-}
+};
 
-export async function getForecastData(lon, lat) {
+export const getForecastData = async (lon, lat) => {
   try {
     (latitude = lat), (longitude = lon);
 
@@ -115,18 +114,13 @@ export async function getForecastData(lon, lat) {
     forecastInterface(forecastData, currentDate, isCelsuis);
     predictions(forecastData);
   } catch (error) {
-    console.log(error)
-  
+    console.log(error);
+
     fourDayForecastRef.innerHTML = `<div class="main-weather">Forecast not available</div>`;
   }
+};
 
-}
-
-
-
-
-
-function changeUnit(){
+const changeUnit = () => {
   windRef = document.getElementsByClassName("wind");
   temperatureRef = document.getElementsByClassName("temp");
   toFahrenheitRef.addEventListener("click", () => {
@@ -138,7 +132,6 @@ function changeUnit(){
       : (toFahrenheitRef.innerText = `Fahrenheit`);
   });
 
-
   windRef = document.getElementsByClassName("wind");
   toKilometersRef.addEventListener("click", () => {
     isMPH = !isMPH;
@@ -147,7 +140,7 @@ function changeUnit(){
       ? (toKilometersRef.innerText = `Meters per Hour`)
       : (toKilometersRef.innerText = `Kilometers per Hour`);
   });
-}
+};
 
 showHistory();
 changeUnit();
