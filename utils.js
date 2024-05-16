@@ -5,8 +5,8 @@ let leftButtonRef;
 let slidesRef;
 let slideContainerRef;
 
-export const createDate =(value)=>{
-  return new Date(value * 1000)
+export function createDate(value) {
+  return new Date(value * 1000);
 }
 
 export function toCelsius(value) {
@@ -28,43 +28,26 @@ export function selectRainImage(value) {
   }
 }
 
+// export function threeHourlyFourcast(date, list) {
+//   let time = [];
+//   let hourlyMax = [];
+//   let rainProbability = [];
+//   let icons = [];
 
-// export function calculateAverages(data, day) {
-//   let maxTemp = 0;
-//   let minTemp = 999;
-//   for (let i = 0; i < data.length; i++) {
-//     if (new Date(data[i].dt * 1000).getDate() === day) {
-//       if (data[i].main.temp_max > maxTemp) {
-//         maxTemp = data[i].main.temp_max;
-//       }
-//       if (data[i].main.temp_min < minTemp) {
-//         minTemp = data[i].main.temp_min;
-//       }
+//   for (let i = 0; i < list.length; i++) {
+//     if (new Date(list[i].dt * 1000).getDate() === date) {
+//       let { temp_max } = list[i].main;
+//       let { dt, pop } = list[i];
+//       let { icon } = list[i].weather[0];
+
+//       time.push(dt);
+//       hourlyMax.push(temp_max);
+//       rainProbability.push(pop);
+//       icons.push(icon);
 //     }
 //   }
-//   return { maxTemp, minTemp };
+//   return { time, hourlyMax, rainProbability, icons };
 // }
-
-export function threeHourlyFourcast(date, list) {
-  let time = [];
-  let hourlyMax = [];
-  let rainProbability = [];
-  let icons = [];
-
-  for (let i = 0; i < list.length; i++) {
-    if (new Date(list[i].dt * 1000).getDate() === date) {
-      let { temp_max } = list[i].main;
-      let { dt, pop } = list[i];
-      let { icon } = list[i].weather[0];
-
-      time.push(dt);
-      hourlyMax.push(temp_max);
-      rainProbability.push(pop);
-      icons.push(icon);
-    }
-  }
-  return { time, hourlyMax, rainProbability, icons };
-}
 
 export function average(max, min) {
   let average = Math.round(max + min / 2);
@@ -73,7 +56,7 @@ export function average(max, min) {
 
 export function isDuplicateLocation(lat, lon, name) {
   let locations = getLocations();
-  if (!locations){
+  if (!locations) {
     return;
   }
   return locations.some((item) => {
@@ -114,6 +97,5 @@ export function controlCarousel() {
 
   window.addEventListener("resize", () => {
     slideContainerRef.scrollLeft = slidesRef.clientWidth * slide + 1;
-
   });
 }

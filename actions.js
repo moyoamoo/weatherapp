@@ -7,12 +7,11 @@ import { saveLocation, showHistory } from "./local_storage.js";
 import {
   toCelsius,
   isDuplicateLocation,
-  // calculateAverages,
-  threeHourlyFourcast,
+ 
   toggleForecast,
   createDate,
 } from "./utils.js";
-import { weatherTips } from "./weather_segment.js";
+import { weatherTips } from "./weather_tips.js";
 import { calculateAverages } from "./calculateAverages.js";
 import {
   createHourHTML,
@@ -20,6 +19,7 @@ import {
   getCurrentWeatherInterface,
 } from "./html.js";
 import { dayNames } from "./config.js";
+import { threeHourlyForecast } from "./threeHourlyForecast.js";
 
 let saveLocationRef;
 let forecastButtonRefs;
@@ -88,7 +88,7 @@ export function forecastInterface(weatherData, currentDate, isCelsuis) {
     if (i % 8 == 0 && i != 0) {
       let { icon } = list[i].weather[0];
       counter++;
-      let { time, hourlyMax, rainProbability, icons } = threeHourlyFourcast(
+      let { time, hourlyMax, rainProbability, icons } = threeHourlyForecast(
         currentDate + counter,
         list
       );

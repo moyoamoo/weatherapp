@@ -27,8 +27,9 @@ let todayWeatherData;
 let possibleLocations;
 let longitude;
 let latitude;
-let currentDay = new Date();
-let currentDate = currentDay.getDate();
+export let currentDay = new Date();
+export let currentDate = currentDay.getDate();
+
 
 detectLocationRef.addEventListener("click", () => {
   getWeatherData();
