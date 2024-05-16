@@ -3,13 +3,13 @@ import { formatTime, toCelsius, selectRainImage } from "./utils.js";
 export const getCurrentWeatherInterface = (
   name,
   timeCalcuated,
-  realFeal,
+  realFeel,
   description,
   icon,
   maximumTemp,
   minimumTemp,
   wind,
-  visibilityKM,
+  visibilityKm,
   pressure,
   humidity,
   sunriseUnix,
@@ -33,7 +33,7 @@ export const getCurrentWeatherInterface = (
        
         <div class="weather-description">
             <p>Feels like</p>
-            <p class="temperature temp">${getTemp(isCelsuis, realFeal)}</p>
+            <p class="temperature temp">${getTemp(isCelsuis, realFeel)}</p>
         </div>
         
         <div class="inner-weather-container">
@@ -57,7 +57,7 @@ export const getCurrentWeatherInterface = (
             isMPH,
             wind
           )}</span></div>
-          <div class="weather-unit"><i class="fa-regular fa-eye"></i><span>Visibility</span> <span>${visibilityKM}km</span></div>
+          <div class="weather-unit"><i class="fa-regular fa-eye"></i><span>Visibility</span> <span>${visibilityKm}km</span></div>
           <div class="weather-unit"><i class="fa-solid fa-exclamation"></i><span>Pressure</span> <span>${pressure}hPa</span></div>
           <div class="weather-unit"><i class="fa-solid fa-water"></i><span>Humidity</span> <span>${humidity}%</span></div>
           <div class="weather-unit"> <i class="fa-regular fa-sun"></i> <span>Sunrise</span> <span>${formatTime(

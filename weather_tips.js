@@ -14,7 +14,7 @@ export const tip = (weatherTip) => {
 export const weatherTips = (visibility, speed, humidity, temp, all) =>{
   let cloudy = all;
   weatherTipsRef.innerHTML = "";
-  let visibilityKM = visibility / 1000;
+  let visibilityKm= visibility / 1000;
   let speedMPH = Math.round(speed * 2.23694);
   let humidityPercentage = Math.round(humidity * 100);
 
@@ -48,21 +48,21 @@ export const weatherTips = (visibility, speed, humidity, temp, all) =>{
   }
   if (
     toCelsius(temp) >= 15 &&
-    visibilityKM >= 6 &&
+    visibilityKm >= 6 &&
     speedMPH <= 12 &&
     cloudy <= 20
   ) {
     tip("Great conditions for walking");
   } else if (
     toCelsius(temp) >= 12 &&
-    visibilityKM >= 6 &&
+    visibilityKm >= 6 &&
     speedMPH <= 12 &&
     cloudy <= 25
   ) {
     tip("Good conditions for walking");
   } else if (
     toCelsius(temp) >= 10 &&
-    visibilityKM >= 6 &&
+    visibilityKm >= 6 &&
     speedMPH <= 18 &&
     cloudy <= 30
   ) {

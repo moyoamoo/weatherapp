@@ -7,19 +7,19 @@ import { saveLocation, showHistory } from "./local_storage.js";
 import {
   toCelsius,
   isDuplicateLocation,
- 
   toggleForecast,
   createDate,
 } from "./utils.js";
 import { weatherTips } from "./weather_tips.js";
-import { calculateAverages } from "./calculateAverages.js";
+import { calculateAverages } from "./calculate_averages.js";
 import {
   createHourHTML,
   fourDayFourcastHTML,
   getCurrentWeatherInterface,
 } from "./html.js";
 import { dayNames } from "./config.js";
-import { threeHourlyForecast } from "./threeHourlyForecast.js";
+import { threeHourlyForecast } from "./three_hourly_forecast.js";
+import { formatValues } from "./format_values.js";
 
 let saveLocationRef;
 let forecastButtonRefs;
@@ -39,30 +39,38 @@ export function currentWeaterInterface(weatherData, isCelsuis, isMPH) {
 
   weatherTips(visibility, speed, humidity, temp, all);
 
-  //calculating values
-  const maximumTemp = toCelsius(temp_max);
-  const minimumTemp = toCelsius(temp_min);
-  const realFeal = toCelsius(feels_like);
-  const visibilityKM = visibility / 1000;
-  const wind = Math.round((speed * 3600) / 1000);
-
-  //Format Data
-  const sunriseUnix = new Date(sunrise * 1000);
-  const sunsetUnix = new Date(sunset * 1000);
-  const timeCalcuated = createDate(dt);
+  let {
+    maximumTemp,
+    minimumTemp,
+    realFeel,
+    visibilityKm,
+    wind,
+    sunriseUnix,
+    sunsetUnix,
+    timeCalcuated,
+  } = formatValues(
+    temp_max,
+    temp_min,
+    feels_like,
+    visibility,
+    speed,
+    sunrise,
+    sunset,
+    dt
+  );
 
   currentWeatherRef.style.background = "none";
 
   currentWeatherRef.innerHTML = getCurrentWeatherInterface(
     name,
     timeCalcuated,
-    realFeal,
+    realFeel,
     description,
     icon,
     maximumTemp,
     minimumTemp,
     wind,
-    visibilityKM,
+    visibilityKm,
     pressure,
     humidity,
     sunriseUnix,
@@ -100,8 +108,8 @@ export function forecastInterface(weatherData, currentDate, isCelsuis) {
 
       let minimumTemp = toCelsius(minTemp);
       let maximumTemp = toCelsius(maxTemp);
-      let formatDay = dayNames[new Date(list[i].dt * 1000).getDay()];
-      let formatDate = new Date(list[i].dt * 1000).getDate();
+      let formatDay = dayNames[createDate(list[i].dt).getDay()];
+      let formatDate = new Date(createDate(list[i].dt)).getDate();
 
       let dailyForecast = createHourHTML(
         time,
