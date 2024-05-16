@@ -1,7 +1,7 @@
 import { getWeatherData, getForecastData } from "./entry.js";
 let locations;
 
-export function saveLocation(lon, lat, name) {
+export const saveLocation = (lon, lat, name) => {
   const locations = JSON.parse(localStorage.getItem("locations"));
   if (locations) {
     const duplicate = locations.some((item) => {
@@ -15,14 +15,14 @@ export function saveLocation(lon, lat, name) {
   } else {
     localStorage.setItem("locations", JSON.stringify([{ lon, lat, name }]));
   }
-}
+};
 
-export function removeLocation(index) {
-  if (index === undefined){
+export const removeLocation = (index) => {
+  if (index === undefined) {
     localStorage.removeItem("locations");
     return;
   }
- 
+
   const locations = getLocations();
   locations.splice(index, 1);
   if (locations.length === 0) {
@@ -30,13 +30,13 @@ export function removeLocation(index) {
   } else {
     localStorage.setItem(`locations`, JSON.stringify(locations));
   }
-}
+};
 
-export function getLocations() {
+export const getLocations = () => {
   return JSON.parse(localStorage.getItem("locations"));
-}
+};
 
-export function showHistory() {
+export const showHistory = () => {
   locations = getLocations();
   const menuListRef = document.getElementById("menu-list");
 
@@ -77,5 +77,4 @@ export function showHistory() {
       showHistory();
     });
   });
-
-}
+};

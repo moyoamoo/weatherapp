@@ -28,7 +28,6 @@ export const weatherTips = (visibility, speed, humidity, temp, all) =>{
   }
 
 
-
   if (cloudy >= 75) {
     tip("Cloudy, poor view of skyline");
   } else if (cloudy < 75 && cloudy > 25) {

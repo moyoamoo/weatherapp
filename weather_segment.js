@@ -1,11 +1,12 @@
 import { weatherPredictionsRef } from "./DOM_references.js";
-import { average, controlCarousel } from "./utils.js ";
+import { average } from "./utils.js ";
 import {
   rainPrediction,
   tempComparison,
   carousel,
   currentRain,
 } from "./html.js";
+import { controlCarousel } from "./control_carousel.js";
 import { calculateAverages } from "./calculate_averages.js";
 import { createRainCounter } from "./create_rain_counter.js";
 import { currentDate } from "./entry.js";
