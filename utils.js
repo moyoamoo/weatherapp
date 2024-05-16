@@ -5,6 +5,10 @@ let leftButtonRef;
 let slidesRef;
 let slideContainerRef;
 
+export const createDate =(value)=>{
+  return new Date(value * 1000)
+}
+
 export function toCelsius(value) {
   return Math.round(value - 273.15);
 }
@@ -23,6 +27,7 @@ export function selectRainImage(value) {
     return 1;
   }
 }
+
 
 export function calculateAverages(data, day) {
   let maxTemp = 0;
