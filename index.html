@@ -25,6 +25,10 @@
     <link rel="manifest" href="./favicon/site.webmanifest" />
     <link rel="stylesheet" href="generics.css" />
     <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=switzer@100,200,300,400,500,600,700&f[]=nunito@400&f[]=bebas-neue@400&display=swap"
+      rel="stylesheet"
+    />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script
       src="https://kit.fontawesome.com/6bd2a3b250.js"
@@ -37,7 +41,6 @@
   <body>
     <header>
       <div class="heading">
-       
         <button id="hamburger" class="hamburger">
           <div class="ham-line-1" id="line-1"></div>
           <div class="ham-line-2" id="line-2"></div>
@@ -46,43 +49,39 @@
         <a href="./index.html">
           <h1>Weather Forecast</h1>
         </a>
-        <img
-          src="./Images/weather_icon.png"
-          alt="cloud with sun illustration"
-        />
-       
-       
       </div>
       <nav id="navigation">
         <div class="menu">
           <h2 class="menu-title">Saved Locations</h2>
           <ul id="menu-list"></ul>
-        
         </div>
       </nav>
-        <button id="detect-location" class="detect-location">
-          Use Current Location <i class="fa-solid fa-location-crosshairs"></i>
-        </button>
-        <div class="location-search-container">
-          <div class="search-bar">
-            <input
-              type="text"
-              id="search-location"
-              placeholder="Search Location"
-              class="search-location"
-            />
-            <button id="search-location-btn" class="search-location-btn">
-              Search
-              <i class="fas fa-search"></i>
-            </button>
-          </div>
-          <select
-            name="possible-location"
-            id="possible-locations"
-            class="possible-locations"
-          ></select>
+   
+      <div class="location-container">
+          <button id="detect-location" class="detect-location">
+            Use Current Location <i class="fa-solid fa-location-crosshairs"></i>
+          </button>
+          <div class="location-search-container">
+            <div class="search-bar">
+              <input
+                type="text"
+                id="search-location"
+                placeholder="Search Location"
+                class="search-location"
+              />
+              <button id="search-location-btn" class="search-location-btn">
+                Search
+                <i class="fas fa-search"></i>
+              </button>
+        
+      </div>
         </div>
-    
+        <select
+          name="possible-location"
+          id="possible-locations"
+          class="possible-locations"
+        ></select>
+      </div>
     </header>
 
     <main>

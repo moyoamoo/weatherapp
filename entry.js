@@ -75,6 +75,7 @@ export const getInputLocation = async (userLocation) => {
 possibleLocationsRef.addEventListener("change", (e) => {
   const { lon, lat } = possibleLocations[Number(e.target.value)];
   getWeatherData(lon, lat);
+  getForecastData(lon, lat);
   possibleLocationsRef.style.display = "none";
 });
 
@@ -95,6 +96,7 @@ export const getWeatherData = async (lon, lat) => {
 
     settingsRef.style.display = "flex";
   } catch (error) {
+    console.log(error);
     currentWeatherRef.innerHTML = `<p>Current Weather Data unavailable</p>`;
   }
 };
@@ -115,7 +117,6 @@ export const getForecastData = async (lon, lat) => {
     predictions(forecastData);
   } catch (error) {
     console.log(error);
-
     fourDayForecastRef.innerHTML = `<div class="main-weather">Forecast not available</div>`;
   }
 };

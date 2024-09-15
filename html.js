@@ -44,7 +44,7 @@ export const getCurrentWeatherInterface = (
     </div>
   
         <div class="weather-container">
-          <div class="weather-unit"><i class="fa-solid fa-temperature-three-quarters"></i> <span>High/Low</span>
+          <div class="weather-unit"><i class="fa-solid fa-temperature-three-quarters"></i> <span class="weather-unit-title">High/Low</span>
            <p><span class="temp">${getTemp(
              isCelsuis,
              maximumTemp
@@ -53,19 +53,19 @@ export const getCurrentWeatherInterface = (
     minimumTemp
   )}</span></p>
           </div>
-          <div class="weather-unit"><i class="fa-solid fa-wind"></i><span>Wind</span> <span class="wind">${getWind(
+          <div class="weather-unit"><i class="fa-solid fa-wind"></i><span class="weather-unit-title">Wind</span> <span class="wind">${getWind(
             isMPH,
             wind
           )}</span></div>
-          <div class="weather-unit"><i class="fa-regular fa-eye"></i><span>Visibility</span> <span>${visibilityKm}km</span></div>
-          <div class="weather-unit"><i class="fa-solid fa-exclamation"></i><span>Pressure</span> <span>${pressure}hPa</span></div>
-          <div class="weather-unit"><i class="fa-solid fa-water"></i><span>Humidity</span> <span>${humidity}%</span></div>
-          <div class="weather-unit"> <i class="fa-regular fa-sun"></i> <span>Sunrise</span> <span>${formatTime(
+          <div class="weather-unit"><i class="fa-regular fa-eye"></i><span  class="weather-unit-title">Visibility</span> <span>${visibilityKm}km</span></div>
+          <div class="weather-unit"><i class="fa-solid fa-exclamation"></i><span class="weather-unit-title">Pressure</span> <span>${pressure}hPa</span></div>
+          <div class="weather-unit"><i class="fa-solid fa-water"></i><span class="weather-unit-title">Humidity</span> <span>${humidity}%</span></div>
+          <div class="weather-unit"> <i class="fa-regular fa-sun"></i> <span class="weather-unit-title">Sunrise</span> <span>${formatTime(
             sunriseUnix
           )}</span>
           </div>
           <div class="weather-unit">
-            <i class="fa-regular fa-moon"></i> <span>Sunset</span> <span>${formatTime(
+            <i class="fa-regular fa-moon"></i> <span class="weather-unit-title">Sunset</span> <span>${formatTime(
               sunsetUnix
             )}</span>
           </div>
