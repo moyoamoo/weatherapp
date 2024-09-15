@@ -12,7 +12,7 @@ export const dayNames = [
 const apiKey = "fbe4c2e2d244f8643bc2bac3de799ba9";
 
 export const getUserLocationURL = (userLocation) => {
-  return `http://api.openweathermap.org/geo/1.0/direct?q=${userLocation}&limit=5&appid=${apiKey}`;
+  return `https://api.openweathermap.org/geo/1.0/direct?q=${userLocation}&limit=5&appid=${apiKey}`;
 };
 
 export const getWeatherURL = (latitude, longitude) => {
